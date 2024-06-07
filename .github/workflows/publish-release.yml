@@ -73,11 +73,14 @@ jobs:
         sed -i "s/^readonly VERSION=.*/readonly VERSION=\"${NEW_VERSION}\"/" deb-get
         
         # Prepend to the changelog
-        echo "deb-get (${NEW_VERSION}-1) unstable; urgency=medium" | cat - debian/changelog > temp && mv temp debian/changelog
-        echo "" >> debian/changelog
-        echo "  * New development snapshot (based on commit ${SHORT_SHA})." >> debian/changelog
-        echo "" >> debian/changelog
-        echo " -- $(git log -1 --format='%aN <%aE>')  $(date -R)" >> debian/changelog
+        echo "deb-get (${NEW_VERSION}-1) unstable; urgency=medium" > temp
+        echo "" >> tmp
+        echo "  * New development snapshot (based on commit ${SHORT_SHA})." >> tmp
+        echo "" >> tmp
+        echo " -- $(git log -1 --format='%aN <%aE>')  $(date -R)" >> tmp
+        cat debian/changelog >> tmp
+        mv temp debian/changelog
+
     - name: Build and Upload.deb
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
