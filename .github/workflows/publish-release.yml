@@ -62,6 +62,8 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v4
+      with:
+        fetch-tags: true
     - name: Update version and changelog
       run: |
         # Get the most recent stable tag and the short SHA1 hash
