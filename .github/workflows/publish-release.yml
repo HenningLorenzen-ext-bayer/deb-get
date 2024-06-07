@@ -74,11 +74,11 @@ jobs:
         
         # Prepend to the changelog
         echo "deb-get (${NEW_VERSION}-1) unstable; urgency=medium" > temp
-        echo "" >> tmp
-        echo "  * New development snapshot (based on commit ${SHORT_SHA})." >> tmp
-        echo "" >> tmp
-        echo " -- $(git log -1 --format='%aN <%aE>')  $(date -R)" >> tmp
-        cat debian/changelog >> tmp
+        echo "" >> temp
+        echo "  * New development snapshot (based on commit ${SHORT_SHA})." >> temp
+        echo "" >> temp
+        echo " -- $(git log -1 --format='%aN <%aE>')  $(date -R)" >> temp
+        cat debian/changelog >> temp
         mv temp debian/changelog
 
     - name: Build and Upload.deb
